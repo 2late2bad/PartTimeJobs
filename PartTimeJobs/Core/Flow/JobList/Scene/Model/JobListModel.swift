@@ -7,6 +7,40 @@
 
 import Foundation
 
+struct Job: Decodable {
+    let id: String
+    let profession: String
+    let employer: String
+    let salary: Double
+    let date: Date
+    let logo: String?
+}
+
 struct JobListModel {
     
+    // MARK: - Public property
+    var jobList: [Job] { privateJobList }
+    
+    // MARK: - Private property
+    private var privateJobList: [Job] = [] {
+        didSet {
+            
+        }
+    }
+    
+    // MARK: - Init
+    init() {}
+    
+    // MARK: - Mutating methods
+    mutating func addJob(_ job: Job) {
+        privateJobList.append(job)
+    }
+    
+    mutating func removeJob(at index: Int) {
+        privateJobList.remove(at: index)
+    }
+    
+    mutating func updateJobs(_ jobs: [Job]) {
+        privateJobList = jobs
+    }
 }
