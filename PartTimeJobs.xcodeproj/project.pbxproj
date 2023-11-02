@@ -23,6 +23,7 @@
 		2440D7FA2AF3C05300DB487D /* JobListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7F92AF3C05300DB487D /* JobListModel.swift */; };
 		2440D7FC2AF3C06100DB487D /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7FB2AF3C06100DB487D /* JobListView.swift */; };
 		2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8002AF3C25C00DB487D /* JobListContract.swift */; };
+		2440D8042AF3CA4300DB487D /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8032AF3CA4300DB487D /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		2440D7F92AF3C05300DB487D /* JobListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListModel.swift; sourceTree = "<group>"; };
 		2440D7FB2AF3C06100DB487D /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
 		2440D8002AF3C25C00DB487D /* JobListContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListContract.swift; sourceTree = "<group>"; };
+		2440D8032AF3CA4300DB487D /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +101,9 @@
 		2440D7CD2AF3ADB000DB487D /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				2440D7BC2AF3ABE900DB487D /* Assets.xcassets */,
-				2440D7C12AF3ABE900DB487D /* Info.plist */,
+				2440D8052AF3CAE300DB487D /* Helper */,
+				2440D8062AF3CAEF00DB487D /* Assets */,
+				2440D8072AF3CAFE00DB487D /* PropertyList */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -257,6 +260,30 @@
 			path = Contract;
 			sourceTree = "<group>";
 		};
+		2440D8052AF3CAE300DB487D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2440D8032AF3CA4300DB487D /* Resources.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		2440D8062AF3CAEF00DB487D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				2440D7BC2AF3ABE900DB487D /* Assets.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		2440D8072AF3CAFE00DB487D /* PropertyList */ = {
+			isa = PBXGroup;
+			children = (
+				2440D7C12AF3ABE900DB487D /* Info.plist */,
+			);
+			path = PropertyList;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -330,6 +357,7 @@
 				2440D7F82AF3BF6F00DB487D /* JobListPresenter.swift in Sources */,
 				2440D7E12AF3B62C00DB487D /* ParentCoordinator.swift in Sources */,
 				2440D7D92AF3B2C700DB487D /* AppFactory.swift in Sources */,
+				2440D8042AF3CA4300DB487D /* Resources.swift in Sources */,
 				2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */,
 				2440D7E52AF3B84B00DB487D /* JobListViewController.swift in Sources */,
 				2440D7DF2AF3B52600DB487D /* JobListCoordinator.swift in Sources */,
@@ -481,7 +509,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XY95NKW6BH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PartTimeJobs/Support/Info.plist;
+				INFOPLIST_FILE = PartTimeJobs/Support/PropertyList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -513,7 +541,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XY95NKW6BH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PartTimeJobs/Support/Info.plist;
+				INFOPLIST_FILE = PartTimeJobs/Support/PropertyList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
