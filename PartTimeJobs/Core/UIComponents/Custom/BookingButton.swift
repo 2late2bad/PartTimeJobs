@@ -16,7 +16,7 @@ final class BookingButton: UIButton {
     }
     
     convenience init(
-        backgroundColor: UIColor = R.Colors.mainElementBackground.uiColor,
+        backgroundColor: UIColor = R.Colors.mainInteractive.ui,
         title: String = "Выберите подработки"
     ) {
         self.init(frame: .zero)
@@ -40,8 +40,8 @@ final class BookingButton: UIButton {
         self.isEnabled = isActive
         self.backgroundColor =
         isActive ?
-        R.Colors.mainElementBackground.uiColor :
-        R.Colors.secondaryElementBackground.uiColor
+        R.Colors.mainInteractive.ui :
+        R.Colors.secondaryInteractive.ui
     }
     
     private func setupSelf() {

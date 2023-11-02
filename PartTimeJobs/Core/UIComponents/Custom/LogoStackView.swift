@@ -16,7 +16,7 @@ final class LogoStackView: UIStackView {
     // MARK: - Property
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.borderColor = R.Colors.imageBorder.uiColor.cgColor
+        imageView.layer.borderColor = R.Colors.imageBorder.ui.cgColor
         imageView.layer.borderWidth = LocalConstant.borderImage
         imageView.contentMode = .scaleAspectFill
         return imageView

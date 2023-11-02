@@ -24,20 +24,20 @@ enum Resources {
         case viewBackground
         case collectionViewBackground
         case listItemBackground
-        case mainElementBackground
-        case secondaryElementBackground
+        case mainInteractive
+        case secondaryInteractive
         case divider
         case imageBorder
         
-        var uiColor: UIColor {
+        var ui: UIColor {
             switch self {
             case .viewBackground, .listItemBackground:
                 return hexStringToUIColor(hex: "#FFFFFF")
             case .collectionViewBackground, .divider, .imageBorder:
                 return hexStringToUIColor(hex: "#EEEEEE")
-            case .mainElementBackground:
+            case .mainInteractive:
                 return hexStringToUIColor(hex: "#F7CE17")
-            case .secondaryElementBackground:
+            case .secondaryInteractive:
                 return hexStringToUIColor(hex: "#DEDEDE")
             }
         }

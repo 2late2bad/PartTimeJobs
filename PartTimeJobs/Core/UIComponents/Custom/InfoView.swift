@@ -55,10 +55,10 @@ final class InfoView: UIView {
     func configure(type: TypeView) {
         switch type {
         case .price(let salary):
-            backgroundColor = R.Colors.mainElementBackground.uiColor
+            backgroundColor = R.Colors.mainInteractive.ui
             labelText = "\(salary.stringDecimal) ₽"
         case .common(let value):
-            backgroundColor = R.Colors.secondaryElementBackground.uiColor
+            backgroundColor = R.Colors.secondaryInteractive.ui
             labelText = value
         }
     }
