@@ -12,6 +12,9 @@ struct JobListFactory {
     let appDIContainer: AppDIContainer?
     
     func makeJobListViewController() -> UIViewController {
-        JobListViewController()
+        let controller = JobListViewController()
+        let presenter = JobListPresenter(view: controller, model: JobListModel())
+        controller.presenter = presenter
+        return controller
     }
 }

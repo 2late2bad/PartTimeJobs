@@ -19,6 +19,10 @@
 		2440D7E12AF3B62C00DB487D /* ParentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7E02AF3B62C00DB487D /* ParentCoordinator.swift */; };
 		2440D7E32AF3B6BC00DB487D /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7E22AF3B6BC00DB487D /* AppDIContainer.swift */; };
 		2440D7E52AF3B84B00DB487D /* JobListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7E42AF3B84B00DB487D /* JobListViewController.swift */; };
+		2440D7F82AF3BF6F00DB487D /* JobListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7F72AF3BF6F00DB487D /* JobListPresenter.swift */; };
+		2440D7FA2AF3C05300DB487D /* JobListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7F92AF3C05300DB487D /* JobListModel.swift */; };
+		2440D7FC2AF3C06100DB487D /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7FB2AF3C06100DB487D /* JobListView.swift */; };
+		2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8002AF3C25C00DB487D /* JobListContract.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		2440D7E02AF3B62C00DB487D /* ParentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentCoordinator.swift; sourceTree = "<group>"; };
 		2440D7E22AF3B6BC00DB487D /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		2440D7E42AF3B84B00DB487D /* JobListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListViewController.swift; sourceTree = "<group>"; };
+		2440D7F72AF3BF6F00DB487D /* JobListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListPresenter.swift; sourceTree = "<group>"; };
+		2440D7F92AF3C05300DB487D /* JobListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListModel.swift; sourceTree = "<group>"; };
+		2440D7FB2AF3C06100DB487D /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
+		2440D8002AF3C25C00DB487D /* JobListContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListContract.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,7 @@
 		2440D7E82AF3BB0000DB487D /* JobList */ = {
 			isa = PBXGroup;
 			children = (
+				2440D7FD2AF3C20300DB487D /* Contract */,
 				2440D7EB2AF3BBAC00DB487D /* Scene */,
 				2440D7E92AF3BB6100DB487D /* Composition */,
 			);
@@ -153,6 +162,7 @@
 		2440D7EC2AF3BBB800DB487D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2440D7F92AF3C05300DB487D /* JobListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,6 +170,7 @@
 		2440D7ED2AF3BBBC00DB487D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2440D7FB2AF3C06100DB487D /* JobListView.swift */,
 				2440D7E42AF3B84B00DB487D /* JobListViewController.swift */,
 			);
 			path = View;
@@ -168,6 +179,7 @@
 		2440D7EE2AF3BBC100DB487D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				2440D7F72AF3BF6F00DB487D /* JobListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -235,6 +247,14 @@
 			children = (
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		2440D7FD2AF3C20300DB487D /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				2440D8002AF3C25C00DB487D /* JobListContract.swift */,
+			);
+			path = Contract;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,14 +327,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2440D7F82AF3BF6F00DB487D /* JobListPresenter.swift in Sources */,
 				2440D7E12AF3B62C00DB487D /* ParentCoordinator.swift in Sources */,
 				2440D7D92AF3B2C700DB487D /* AppFactory.swift in Sources */,
+				2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */,
 				2440D7E52AF3B84B00DB487D /* JobListViewController.swift in Sources */,
 				2440D7DF2AF3B52600DB487D /* JobListCoordinator.swift in Sources */,
+				2440D7FC2AF3C06100DB487D /* JobListView.swift in Sources */,
 				2440D7B42AF3ABE800DB487D /* AppDelegate.swift in Sources */,
 				2440D7DD2AF3B50600DB487D /* JobListFactory.swift in Sources */,
 				2440D7DB2AF3B32400DB487D /* AppCoordinator.swift in Sources */,
 				2440D7B62AF3ABE800DB487D /* SceneDelegate.swift in Sources */,
+				2440D7FA2AF3C05300DB487D /* JobListModel.swift in Sources */,
 				2440D7D72AF3B27900DB487D /* Coordinator.swift in Sources */,
 				2440D7E32AF3B6BC00DB487D /* AppDIContainer.swift in Sources */,
 			);
