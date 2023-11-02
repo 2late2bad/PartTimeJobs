@@ -24,6 +24,13 @@
 		2440D7FC2AF3C06100DB487D /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7FB2AF3C06100DB487D /* JobListView.swift */; };
 		2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8002AF3C25C00DB487D /* JobListContract.swift */; };
 		2440D8042AF3CA4300DB487D /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8032AF3CA4300DB487D /* Resources.swift */; };
+		2440D8092AF3D03C00DB487D /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8082AF3D03C00DB487D /* BaseLabel.swift */; };
+		2440D80B2AF3D07D00DB487D /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D80A2AF3D07D00DB487D /* InfoView.swift */; };
+		2440D80D2AF3D61A00DB487D /* Double+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D80C2AF3D61A00DB487D /* Double+ext.swift */; };
+		2440D8122AF3D72000DB487D /* LogoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8112AF3D72000DB487D /* LogoStackView.swift */; };
+		2440D8142AF3D81800DB487D /* TimeStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8132AF3D81800DB487D /* TimeStackView.swift */; };
+		2440D8162AF3D83000DB487D /* Date+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8152AF3D83000DB487D /* Date+ext.swift */; };
+		2440D8182AF3D8EE00DB487D /* BookingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8172AF3D8EE00DB487D /* BookingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +53,13 @@
 		2440D7FB2AF3C06100DB487D /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
 		2440D8002AF3C25C00DB487D /* JobListContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListContract.swift; sourceTree = "<group>"; };
 		2440D8032AF3CA4300DB487D /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		2440D8082AF3D03C00DB487D /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
+		2440D80A2AF3D07D00DB487D /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		2440D80C2AF3D61A00DB487D /* Double+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ext.swift"; sourceTree = "<group>"; };
+		2440D8112AF3D72000DB487D /* LogoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoStackView.swift; sourceTree = "<group>"; };
+		2440D8132AF3D81800DB487D /* TimeStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStackView.swift; sourceTree = "<group>"; };
+		2440D8152AF3D83000DB487D /* Date+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+ext.swift"; sourceTree = "<group>"; };
+		2440D8172AF3D8EE00DB487D /* BookingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +248,7 @@
 		2440D7F42AF3BD9900DB487D /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				2440D8082AF3D03C00DB487D /* BaseLabel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -241,6 +256,10 @@
 		2440D7F52AF3BDBB00DB487D /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				2440D80A2AF3D07D00DB487D /* InfoView.swift */,
+				2440D8112AF3D72000DB487D /* LogoStackView.swift */,
+				2440D8132AF3D81800DB487D /* TimeStackView.swift */,
+				2440D8172AF3D8EE00DB487D /* BookingButton.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -248,6 +267,8 @@
 		2440D7F62AF3BE7500DB487D /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2440D80C2AF3D61A00DB487D /* Double+ext.swift */,
+				2440D8152AF3D83000DB487D /* Date+ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -354,11 +375,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2440D80D2AF3D61A00DB487D /* Double+ext.swift in Sources */,
 				2440D7F82AF3BF6F00DB487D /* JobListPresenter.swift in Sources */,
 				2440D7E12AF3B62C00DB487D /* ParentCoordinator.swift in Sources */,
 				2440D7D92AF3B2C700DB487D /* AppFactory.swift in Sources */,
 				2440D8042AF3CA4300DB487D /* Resources.swift in Sources */,
+				2440D80B2AF3D07D00DB487D /* InfoView.swift in Sources */,
+				2440D8162AF3D83000DB487D /* Date+ext.swift in Sources */,
+				2440D8142AF3D81800DB487D /* TimeStackView.swift in Sources */,
 				2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */,
+				2440D8092AF3D03C00DB487D /* BaseLabel.swift in Sources */,
 				2440D7E52AF3B84B00DB487D /* JobListViewController.swift in Sources */,
 				2440D7DF2AF3B52600DB487D /* JobListCoordinator.swift in Sources */,
 				2440D7FC2AF3C06100DB487D /* JobListView.swift in Sources */,
@@ -368,7 +394,9 @@
 				2440D7B62AF3ABE800DB487D /* SceneDelegate.swift in Sources */,
 				2440D7FA2AF3C05300DB487D /* JobListModel.swift in Sources */,
 				2440D7D72AF3B27900DB487D /* Coordinator.swift in Sources */,
+				2440D8122AF3D72000DB487D /* LogoStackView.swift in Sources */,
 				2440D7E32AF3B6BC00DB487D /* AppDIContainer.swift in Sources */,
+				2440D8182AF3D8EE00DB487D /* BookingButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
