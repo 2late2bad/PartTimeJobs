@@ -21,7 +21,6 @@
 		2440D7E52AF3B84B00DB487D /* JobListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7E42AF3B84B00DB487D /* JobListViewController.swift */; };
 		2440D7F82AF3BF6F00DB487D /* JobListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7F72AF3BF6F00DB487D /* JobListPresenter.swift */; };
 		2440D7FA2AF3C05300DB487D /* JobListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7F92AF3C05300DB487D /* JobListModel.swift */; };
-		2440D7FC2AF3C06100DB487D /* JobListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D7FB2AF3C06100DB487D /* JobListView.swift */; };
 		2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8002AF3C25C00DB487D /* JobListContract.swift */; };
 		2440D8042AF3CA4300DB487D /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8032AF3CA4300DB487D /* Resources.swift */; };
 		2440D8092AF3D03C00DB487D /* BaseLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8082AF3D03C00DB487D /* BaseLabel.swift */; };
@@ -38,6 +37,8 @@
 		2440D8382AF42A1D00DB487D /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8372AF42A1D00DB487D /* UIButton+ext.swift */; };
 		2440D8402AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D83F2AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift */; };
 		2440D8422AF4FE1400DB487D /* UICollectionView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8412AF4FE1400DB487D /* UICollectionView+ext.swift */; };
+		2440D8442AF503B900DB487D /* JobModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8432AF503B900DB487D /* JobModel.swift */; };
+		2440D8492AF54E1A00DB487D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8482AF54E1A00DB487D /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +58,6 @@
 		2440D7E42AF3B84B00DB487D /* JobListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListViewController.swift; sourceTree = "<group>"; };
 		2440D7F72AF3BF6F00DB487D /* JobListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListPresenter.swift; sourceTree = "<group>"; };
 		2440D7F92AF3C05300DB487D /* JobListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListModel.swift; sourceTree = "<group>"; };
-		2440D7FB2AF3C06100DB487D /* JobListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListView.swift; sourceTree = "<group>"; };
 		2440D8002AF3C25C00DB487D /* JobListContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobListContract.swift; sourceTree = "<group>"; };
 		2440D8032AF3CA4300DB487D /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		2440D8082AF3D03C00DB487D /* BaseLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseLabel.swift; sourceTree = "<group>"; };
@@ -74,6 +74,8 @@
 		2440D8372AF42A1D00DB487D /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
 		2440D83F2AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionLayoutSection+ext.swift"; sourceTree = "<group>"; };
 		2440D8412AF4FE1400DB487D /* UICollectionView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ext.swift"; sourceTree = "<group>"; };
+		2440D8432AF503B900DB487D /* JobModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobModel.swift; sourceTree = "<group>"; };
+		2440D8482AF54E1A00DB487D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				2440D7F92AF3C05300DB487D /* JobListModel.swift */,
+				2440D8432AF503B900DB487D /* JobModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,7 +206,6 @@
 			children = (
 				2440D8192AF3DF5D00DB487D /* Cell */,
 				2440D7E42AF3B84B00DB487D /* JobListViewController.swift */,
-				2440D7FB2AF3C06100DB487D /* JobListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,8 +288,8 @@
 				2440D80C2AF3D61A00DB487D /* Double+ext.swift */,
 				2440D8152AF3D83000DB487D /* Date+ext.swift */,
 				2440D8312AF417D400DB487D /* UIView+ext.swift */,
-				2440D8332AF4184A00DB487D /* UIStackView+ext.swift */,
 				2440D8372AF42A1D00DB487D /* UIButton+ext.swift */,
+				2440D8332AF4184A00DB487D /* UIStackView+ext.swift */,
 				2440D8412AF4FE1400DB487D /* UICollectionView+ext.swift */,
 				2440D83F2AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift */,
 			);
@@ -306,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				2440D8032AF3CA4300DB487D /* Resources.swift */,
+				2440D8482AF54E1A00DB487D /* Utils.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -409,18 +412,19 @@
 				2440D7F82AF3BF6F00DB487D /* JobListPresenter.swift in Sources */,
 				2440D7E12AF3B62C00DB487D /* ParentCoordinator.swift in Sources */,
 				2440D7D92AF3B2C700DB487D /* AppFactory.swift in Sources */,
+				2440D8492AF54E1A00DB487D /* Utils.swift in Sources */,
 				2440D8042AF3CA4300DB487D /* Resources.swift in Sources */,
 				2440D8302AF3FB5400DB487D /* JobCell.swift in Sources */,
 				2440D80B2AF3D07D00DB487D /* InfoView.swift in Sources */,
 				2440D8162AF3D83000DB487D /* Date+ext.swift in Sources */,
 				2440D8142AF3D81800DB487D /* TimeStackView.swift in Sources */,
 				2440D8382AF42A1D00DB487D /* UIButton+ext.swift in Sources */,
+				2440D8442AF503B900DB487D /* JobModel.swift in Sources */,
 				2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */,
 				2440D8092AF3D03C00DB487D /* BaseLabel.swift in Sources */,
 				2440D8362AF4199B00DB487D /* BaseStackView.swift in Sources */,
 				2440D7E52AF3B84B00DB487D /* JobListViewController.swift in Sources */,
 				2440D7DF2AF3B52600DB487D /* JobListCoordinator.swift in Sources */,
-				2440D7FC2AF3C06100DB487D /* JobListView.swift in Sources */,
 				2440D7B42AF3ABE800DB487D /* AppDelegate.swift in Sources */,
 				2440D7DD2AF3B50600DB487D /* JobListFactory.swift in Sources */,
 				2440D8402AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift in Sources */,

@@ -8,20 +8,19 @@
 import UIKit
 
 protocol JobListPresenterProtocol {
-    func fetchData()
+    init(view: JobListViewProtocol, model: JobListModel)
+    func viewDidLoad()
     func bookingButtonTapped()
+    func didSelectJob(id: String)
+    func didDeselectJob(id: String)
     func updateSearchController(searchBarText: String?)
 }
 
 final class JobListViewController: UIViewController {
-    
-    enum Section: Int, CaseIterable {
-        case jobs
-    }
-    
-    typealias Datasource = UICollectionViewDiffableDataSource<Section, Job>
-    typealias Snapshot   = NSDiffableDataSourceSnapshot<Section, Job>
-    typealias JobCellReg = UICollectionView.CellRegistration<JobCell, Job>
+        
+    typealias Datasource = UICollectionViewDiffableDataSource<Section, SectionItem>
+    typealias Snapshot   = NSDiffableDataSourceSnapshot<Section, SectionItem>
+    typealias JobCellReg = UICollectionView.CellRegistration<JobCell, SectionItem>
     
     // MARK: - Property
     var presenter: JobListPresenterProtocol!
@@ -68,7 +67,7 @@ final class JobListViewController: UIViewController {
         setupUI()
         setupSearchController()
         createDataSource()
-        presenter.fetchData()
+        presenter.viewDidLoad()
     }
 }
 
@@ -112,8 +111,10 @@ private extension JobListViewController {
     }
 
     func createDataSource() {
-        let cellRegistration = JobCellReg { cell, indexPath, model in
-            cell.configure(with: model)
+        let cellRegistration = JobCellReg { cell, indexPath, item in
+            if case let .jobs(job) = item {
+                cell.configure(with: job)
+            }
         }
 
         dataSource = Datasource(collectionView: collectionView,
@@ -121,16 +122,15 @@ private extension JobListViewController {
     }
     
     func applySnapshot(
-        section: Section,
-        items: [Job],
+        data: SectionData,
         selectedPaths: [IndexPath],
         animatingDifferences: Bool = false,
         completion: (() -> Void)? = nil
     ) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Job>()
+        var snapshot = Snapshot()
         //snapshot.deleteAllItems()
-        snapshot.appendSections([section])
-        snapshot.appendItems(items, toSection: section)
+        snapshot.appendSections([data.key])
+        snapshot.appendItems(data.values, toSection: data.key)
         self.dataSource.apply(snapshot, animatingDifferences: animatingDifferences, completion: completion)
         collectionView.select(selectedPaths, scrollPosition: [])
     }
@@ -139,8 +139,18 @@ private extension JobListViewController {
 // MARK: - JobListViewProtocol
 extension JobListViewController: JobListViewProtocol {
     
-    func updateCollection(with data: [Job], selectedPaths: [IndexPath]) {
-        applySnapshot(section: .jobs, items: data, selectedPaths: selectedPaths)
+    func updateButton(with title: String, isActive: Bool) {
+        bookingButton.configure(with: title, isActive: isActive)
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func updateCollection(with data: SectionData, selectedPaths: [IndexPath]) {
+        applySnapshot(data: data, selectedPaths: selectedPaths, animatingDifferences: true)
     }
 }
 
@@ -148,11 +158,21 @@ extension JobListViewController: JobListViewProtocol {
 extension JobListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        if let item = dataSource.itemIdentifier(for: indexPath) {
+            switch item {
+            case .jobs(let job):
+                presenter.didSelectJob(id: job.id)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-
+        if let item = dataSource.itemIdentifier(for: indexPath) {
+            switch item {
+            case .jobs(let job):
+                presenter.didDeselectJob(id: job.id)
+            }
+        }
     }
 }
 

@@ -100,7 +100,7 @@ private extension JobCell {
             containerStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             
-            professionLabel.heightAnchor.constraint(equalToConstant: 32),
+            professionLabel.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
 }

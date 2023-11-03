@@ -8,49 +8,73 @@
 import Foundation
 
 protocol JobListViewProtocol: AnyObject {
-    func updateCollection(with data: [Job], selectedPaths: [IndexPath])
+    func updateButton(with title: String, isActive: Bool)
+    func showAlert(title: String, message: String)
+    func updateCollection(with data: SectionData, selectedPaths: [IndexPath])
 }
 
-final class JobListPresenter {
+final class JobListPresenter: JobListPresenterProtocol {
     
     // MARK: - Property
     private weak var view: JobListViewProtocol!
-    private var model: JobListModel
+    private let model: JobListModel
+
+    var selectedPaths: [IndexPath] = []
+    var selectedJobsId: Set<String> = Set() {
+        didSet {
+            setupButton()
+        }
+    }
     
     // MARK: - Init
     init(view: JobListViewProtocol, model: JobListModel) {
         self.view = view
         self.model = model
     }
-}
-
-// MARK: - JobListPresenterProtocol
-extension JobListPresenter: JobListPresenterProtocol {
     
-    func fetchData() {
-        // >DEBUG
-        let debugData: [Job] = [
-            .init(id: "1", profession: "Грузчик", employer: "Озон", salary: 1600, date: .now, logo: nil),
-            .init(id: "2", profession: "Монтажник", employer: "ОЗОН", salary: 200, date: .now, logo: nil),
-            .init(id: "3", profession: "Разработчик", employer: "Пятерочка", salary: 14400, date: .now, logo: nil),
-            .init(id: "4", profession: "Строитель", employer: "Шелф", salary: 1200, date: .now, logo: nil),
-            .init(id: "5", profession: "Монтажник", employer: "ОЗОН", salary: 200.12, date: .now, logo: nil),
-            .init(id: "6", profession: "Разработчик", employer: "Пятерочка", salary: 14400, date: .now, logo: nil),
-            .init(id: "7", profession: "Строитель", employer: "Шелф", salary: 1200.00, date: .now, logo: nil),
-            .init(id: "8", profession: "Монтажник", employer: "ОЗОН", salary: 200, date: .now, logo: nil),
-            .init(id: "9", profession: "Разработчик", employer: "Пятерочка", salary: 14400, date: .now, logo: nil),
-            .init(id: "10", profession: "Коп", employer: "Пятерочка", salary: 0.01, date: .now, logo: nil),
-            .init(id: "11", profession: "Копр", employer: "Пятерочка", salary: 14400, date: .now, logo: nil),
-            .init(id: "12", profession: "Копро", employer: "Пятерочка", salary: 5555.55, date: .now, logo: nil)
-        ]
-        view.updateCollection(with: debugData, selectedPaths: [])
+    func viewDidLoad() {
+//        var selectedPaths: [IndexPath] = []
+//        let jobs: [JobModel] = sectionData.getJobs()
+//        for (index, value) in jobs.enumerated() {
+//            if selectedJobsId.contains(value.id) {
+//                selectedPaths.append([0, index])
+//            }
+//        }
+        setupButton()
+        view.updateCollection(with: model.allJobData, selectedPaths: [])
+    }
+    
+    func didSelectJob(id: String) {
+        selectedJobsId.insert(id)
+    }
+    
+    func didDeselectJob(id: String) {
+        selectedJobsId.remove(id)
     }
     
     func bookingButtonTapped() {
+        let alertTitle: String = "Успех"
+        let alertMessage: String = "Вы заработали \(1000.00.stringDecimal) рублей"
         
+        view?.showAlert(title: alertTitle, message: alertMessage)
+    }
+
+    func setupButton() {
+        if !selectedJobsId.isEmpty {
+            let jobCount = selectedJobsId.count
+            let word = Utils.pluralForm(for: jobCount, one: "подработку", few: "подработки", many: "подработок")
+            view?.updateButton(with: "Забронировать \(jobCount) \(word)", isActive: true)
+        } else {
+            view?.updateButton(with: "Выберите подработки", isActive: false)
+        }
     }
     
     func updateSearchController(searchBarText: String?) {
         
     }
+}
+
+// MARK: - Private methods
+private extension JobListPresenter {
+    
 }
