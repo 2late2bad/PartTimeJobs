@@ -28,7 +28,10 @@ extension UIView {
         borderLayer.name = LocalName.OutsideBorder
         
         let halfBorderWidth = borderWidth / 2
-        let path = UIBezierPath(roundedRect: bounds.insetBy(dx: -halfBorderWidth, dy: -halfBorderWidth), cornerRadius: layer.cornerRadius)
+        let path = UIBezierPath(
+            roundedRect: bounds.insetBy(dx: -halfBorderWidth, dy: -halfBorderWidth),
+            cornerRadius: layer.cornerRadius
+        )
         
         borderLayer.lineWidth = borderWidth
         borderLayer.strokeColor = borderColor.cgColor
@@ -38,7 +41,7 @@ extension UIView {
         layer.addSublayer(borderLayer)
     }
     
-    func addShadowDefault(
+    func setShadow(
         color: UIColor,
         alpha: CGFloat,
         radius: CGFloat,

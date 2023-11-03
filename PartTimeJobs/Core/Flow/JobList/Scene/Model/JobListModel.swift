@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: -
 enum Section: Hashable {
     case jobs
 }
@@ -22,15 +23,15 @@ struct SectionData {
 
 struct JobListModel {
     
-    var allJobData: SectionData { allJobSection }
-    var filterJobData : SectionData { filterJobSection }
+    var allJobs: SectionData { allJobSection }
+    var filterJobs: SectionData { filterJobSection }
     //var selectedPaths: [IndexPath] = []
     
     private var allJobSection: SectionData = .init(key: .jobs, values: [])
     private var filterJobSection: SectionData = .init(key: .jobs, values: [])
     
     init() {
-        // MOCK DATA
+        // TODO: - MOCK DATA
         allJobSection =
         SectionData(key: .jobs, values: [
             .jobs(.init(id: "1", profession: "Грузчик", employer: "Озон", salary: 1600, date: .now, logo: nil)),

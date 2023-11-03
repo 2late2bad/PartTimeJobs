@@ -8,7 +8,7 @@
 import UIKit
 
 protocol JobListPresenterProtocol {
-    init(view: JobListViewProtocol, model: JobListModel)
+    init(view: JobListViewProtocol, model: JobListModel, networkService: JobNetworkService)
     func viewDidLoad()
     func bookingButtonTapped()
     func didSelectJob(id: String)
@@ -27,12 +27,7 @@ final class JobListViewController: UIViewController {
     private var dataSource: Datasource!
     private let searchController = UISearchController(searchResultsController: nil)
     private lazy var bookingButton = BookingButton(primaryAction: bookingAction)
-    private lazy var backButtonView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = R.Colors.viewBackground.ui.withAlphaComponent(0.9)
-        return view
-    }()
+    private let backButtonView = UIView()
     private var bookingAction: UIAction {
         UIAction { [unowned self] _ in
             presenter.bookingButtonTapped()
@@ -42,8 +37,8 @@ final class JobListViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = R.Colors.collectionViewBackground.ui
-        collectionView.showsVerticalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.allowsMultipleSelection = true
         collectionView.delegate = self
         return collectionView
@@ -63,7 +58,7 @@ final class JobListViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        setupViews()
         setupUI()
         setupSearchController()
         createDataSource()
@@ -74,12 +69,14 @@ final class JobListViewController: UIViewController {
 // MARK: - Private methods
 private extension JobListViewController {
     
-    func setupView() {
+    func setupViews() {
         view.backgroundColor = R.Colors.viewBackground.ui
         view.addSubviews(collectionView, backButtonView, bookingButton)
+        backButtonView.backgroundColor = R.Colors.viewBackground.ui.withAlphaComponent(0.9)
     }
     
     func setupUI() {
+        backButtonView.translatesAutoresizingMaskIntoConstraints = false
         bookingButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

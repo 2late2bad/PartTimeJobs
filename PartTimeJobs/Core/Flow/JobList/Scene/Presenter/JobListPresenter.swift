@@ -13,12 +13,14 @@ protocol JobListViewProtocol: AnyObject {
     func updateCollection(with data: SectionData, selectedPaths: [IndexPath])
 }
 
-final class JobListPresenter: JobListPresenterProtocol {
+final class JobListPresenter {
     
     // MARK: - Property
     private weak var view: JobListViewProtocol!
-    private let model: JobListModel
-
+    private var model: JobListModel
+    private let networkService: JobNetworkService
+    
+    // TODO: -
     var selectedPaths: [IndexPath] = []
     var selectedJobsId: Set<String> = Set() {
         didSet {
@@ -27,11 +29,20 @@ final class JobListPresenter: JobListPresenterProtocol {
     }
     
     // MARK: - Init
-    init(view: JobListViewProtocol, model: JobListModel) {
+    init(view: JobListViewProtocol, model: JobListModel, networkService: JobNetworkService) {
         self.view = view
         self.model = model
+        self.networkService = networkService
     }
     
+    // MARK: - Private methods
+    
+}
+
+// MARK: - JobListPresenterProtocol
+extension JobListPresenter: JobListPresenterProtocol {
+    
+    // TODO: -
     func viewDidLoad() {
 //        var selectedPaths: [IndexPath] = []
 //        let jobs: [JobModel] = sectionData.getJobs()
@@ -40,8 +51,17 @@ final class JobListPresenter: JobListPresenterProtocol {
 //                selectedPaths.append([0, index])
 //            }
 //        }
-        setupButton()
-        view.updateCollection(with: model.allJobData, selectedPaths: [])
+        
+        Task {
+            do {
+                let jobs = try await networkService.fetchJobs()
+                model.updateJobs(jobs)
+                view.updateCollection(with: model.allJobs, selectedPaths: [])
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+//        setupButton()
     }
     
     func didSelectJob(id: String) {
@@ -62,7 +82,7 @@ final class JobListPresenter: JobListPresenterProtocol {
     func setupButton() {
         if !selectedJobsId.isEmpty {
             let jobCount = selectedJobsId.count
-            let word = Utils.pluralForm(for: jobCount, one: "подработку", few: "подработки", many: "подработок")
+            let word = Utils.PluralForm(for: jobCount, one: "подработку", few: "подработки", many: "подработок")
             view?.updateButton(with: "Забронировать \(jobCount) \(word)", isActive: true)
         } else {
             view?.updateButton(with: "Выберите подработки", isActive: false)
@@ -72,9 +92,4 @@ final class JobListPresenter: JobListPresenterProtocol {
     func updateSearchController(searchBarText: String?) {
         
     }
-}
-
-// MARK: - Private methods
-private extension JobListPresenter {
-    
 }

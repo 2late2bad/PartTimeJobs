@@ -28,6 +28,8 @@ enum Resources {
         case secondaryInteractive
         case divider
         case imageBorder
+        case shadowForSelect
+        case shadowDefault
         
         var ui: UIColor {
             switch self {
@@ -35,10 +37,12 @@ enum Resources {
                 return hexStringToUIColor(hex: "#FFFFFF")
             case .collectionViewBackground, .divider, .imageBorder:
                 return hexStringToUIColor(hex: "#EEEEEE")
-            case .mainInteractive:
+            case .mainInteractive, .shadowForSelect:
                 return hexStringToUIColor(hex: "#F7CE17")
             case .secondaryInteractive:
                 return hexStringToUIColor(hex: "#DEDEDE")
+            case .shadowDefault:
+                return hexStringToUIColor(hex: "#000000")
             }
         }
     }

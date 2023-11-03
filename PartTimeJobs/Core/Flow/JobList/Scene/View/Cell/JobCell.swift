@@ -72,14 +72,15 @@ private extension JobCell {
     func setSelected(_ isSelected: Bool) {
         if isSelected {
             addOutsideBorder(borderWidth: 2.0, borderColor: R.Colors.mainInteractive.ui)
-            addShadowDefault(color: R.Colors.mainInteractive.ui, alpha: 0.6, radius: 4, cornerRadius: 15)
+            setShadow(color: R.Colors.shadowForSelect.ui, alpha: 0.6, radius: 4, cornerRadius: 15)
         } else {
             removeSubLayers()
-            removeShadow()
+            setShadow(color: R.Colors.shadowDefault.ui, alpha: 0.12, radius: 4, cornerRadius: 15)
         }
     }
     
     func setupSelf() {
+        setShadow(color: R.Colors.shadowDefault.ui, alpha: 0.12, radius: 4, cornerRadius: 15)
         backgroundColor = R.Colors.listItemBackground.ui
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(topInfoStackView)

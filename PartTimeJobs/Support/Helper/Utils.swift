@@ -11,7 +11,7 @@ struct Utils {
     
     /// Возвращает строку с учетом склонения по числу 'count'.
     /// Необходимо указать склонение для случаев: один, несколько, много
-    static func pluralForm(for count: Int, one: String, few: String, many: String) -> String {
+    static func PluralForm(for count: Int, one: String, few: String, many: String) -> String {
         let cases = [one, few, many]
         let rem100 = count % 100
         let rem10 = count % 10
