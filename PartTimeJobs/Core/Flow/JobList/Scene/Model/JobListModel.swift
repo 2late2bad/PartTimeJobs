@@ -16,6 +16,16 @@ struct Job: Decodable {
     let logo: String?
 }
 
+extension Job: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func ==(lhs: Job, rhs: Job) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 struct JobListModel {
     
     // MARK: - Public property
