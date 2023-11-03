@@ -18,7 +18,9 @@ final class LogoStackView: UIStackView {
         let imageView = UIImageView()
         imageView.layer.borderColor = R.Colors.imageBorder.ui.cgColor
         imageView.layer.borderWidth = LocalConstant.borderImage
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "questionmark.circle.fill")
+        imageView.tintColor = R.Colors.secondaryInteractive.ui
         return imageView
     }()
     
@@ -45,9 +47,13 @@ final class LogoStackView: UIStackView {
     }
     
     // MARK: - Methods
-    func configure(image: UIImage?, label: String?) {
-        imageView.image = image
+    func configure(imageUrl: String?, label: String?) {
         self.label.text = label
+        
+        ImageLoader.instance.downloadImage(from: imageUrl) { [weak self] data in
+            guard let self else { return }
+            DispatchQueue.main.async { self.imageView.image = UIImage(data: data) }
+        }
     }
     
     private func setupSelf() {
