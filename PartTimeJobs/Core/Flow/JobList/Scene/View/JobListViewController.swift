@@ -68,10 +68,6 @@ final class JobListViewController: UIViewController {
         setupUI()
         setupSearchController()
         createDataSource()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         presenter.fetchData()
     }
 }
