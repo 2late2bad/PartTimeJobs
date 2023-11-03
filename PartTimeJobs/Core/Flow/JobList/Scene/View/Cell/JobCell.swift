@@ -15,7 +15,7 @@ final class JobCell: UICollectionViewCell {
     // MARK: - Private property
     private lazy var containerStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = .red
+        stackView.backgroundColor = .clear
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,8 +28,8 @@ final class JobCell: UICollectionViewCell {
     private lazy var salaryView = InfoView()
     private lazy var logoStackView = LogoStackView()
     private lazy var timeStackView = TimeStackView()
-    private lazy var topInfoStackView = BaseStackView(arrangedSubviews: [professionLabel, salaryView])
-    private lazy var bottomInfoStackView = BaseStackView(arrangedSubviews: [logoStackView, timeStackView])
+    private lazy var topInfoStackView = BaseStackView(axis: .horizontal)
+    private lazy var bottomInfoStackView = BaseStackView(axis: .horizontal)
     
     // MARK: - Override property
     override var isSelected: Bool {
@@ -84,11 +84,15 @@ private extension JobCell {
     }
     
     func setupSelf() {
-        backgroundColor = .systemBackground
+        backgroundColor = R.Colors.listItemBackground.ui
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(topInfoStackView)
-        containerStackView.addSeparator(of: 1, color: .lightGray)
+        containerStackView.addSeparator(of: 1, color: R.Colors.divider.ui)
         containerStackView.addArrangedSubview(bottomInfoStackView)
+        topInfoStackView.addArrangedSubview(professionLabel)
+        topInfoStackView.addArrangedSubview(salaryView)
+        bottomInfoStackView.addArrangedSubview(logoStackView)
+        bottomInfoStackView.addArrangedSubview(timeStackView)
         
         NSLayoutConstraint.activate([
             containerStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),

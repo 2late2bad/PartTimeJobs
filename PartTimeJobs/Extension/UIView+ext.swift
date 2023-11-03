@@ -9,6 +9,8 @@ import UIKit.UIView
 
 extension UIView {
     
+    func addSubviews(_ views: UIView...) { views.forEach { addSubview($0) } }
+    
     enum LocalName {
         static let OutsideBorder = "borderLayer"
     }

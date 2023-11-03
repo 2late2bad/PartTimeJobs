@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol JobListViewProtocol: AnyObject {
-    
-}
 
-protocol JobListPresenterProtocol {
-    
-}
+
+

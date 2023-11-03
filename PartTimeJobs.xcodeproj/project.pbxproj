@@ -35,6 +35,9 @@
 		2440D8322AF417D400DB487D /* UIView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8312AF417D400DB487D /* UIView+ext.swift */; };
 		2440D8342AF4184A00DB487D /* UIStackView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8332AF4184A00DB487D /* UIStackView+ext.swift */; };
 		2440D8362AF4199B00DB487D /* BaseStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8352AF4199B00DB487D /* BaseStackView.swift */; };
+		2440D8382AF42A1D00DB487D /* UIButton+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8372AF42A1D00DB487D /* UIButton+ext.swift */; };
+		2440D8402AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D83F2AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift */; };
+		2440D8422AF4FE1400DB487D /* UICollectionView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2440D8412AF4FE1400DB487D /* UICollectionView+ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +71,9 @@
 		2440D8312AF417D400DB487D /* UIView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ext.swift"; sourceTree = "<group>"; };
 		2440D8332AF4184A00DB487D /* UIStackView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+ext.swift"; sourceTree = "<group>"; };
 		2440D8352AF4199B00DB487D /* BaseStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackView.swift; sourceTree = "<group>"; };
+		2440D8372AF42A1D00DB487D /* UIButton+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+ext.swift"; sourceTree = "<group>"; };
+		2440D83F2AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionLayoutSection+ext.swift"; sourceTree = "<group>"; };
+		2440D8412AF4FE1400DB487D /* UICollectionView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +287,9 @@
 				2440D8152AF3D83000DB487D /* Date+ext.swift */,
 				2440D8312AF417D400DB487D /* UIView+ext.swift */,
 				2440D8332AF4184A00DB487D /* UIStackView+ext.swift */,
+				2440D8372AF42A1D00DB487D /* UIButton+ext.swift */,
+				2440D8412AF4FE1400DB487D /* UICollectionView+ext.swift */,
+				2440D83F2AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -405,6 +414,7 @@
 				2440D80B2AF3D07D00DB487D /* InfoView.swift in Sources */,
 				2440D8162AF3D83000DB487D /* Date+ext.swift in Sources */,
 				2440D8142AF3D81800DB487D /* TimeStackView.swift in Sources */,
+				2440D8382AF42A1D00DB487D /* UIButton+ext.swift in Sources */,
 				2440D8012AF3C25C00DB487D /* JobListContract.swift in Sources */,
 				2440D8092AF3D03C00DB487D /* BaseLabel.swift in Sources */,
 				2440D8362AF4199B00DB487D /* BaseStackView.swift in Sources */,
@@ -413,6 +423,8 @@
 				2440D7FC2AF3C06100DB487D /* JobListView.swift in Sources */,
 				2440D7B42AF3ABE800DB487D /* AppDelegate.swift in Sources */,
 				2440D7DD2AF3B50600DB487D /* JobListFactory.swift in Sources */,
+				2440D8402AF4FDE900DB487D /* NSCollectionLayoutSection+ext.swift in Sources */,
+				2440D8422AF4FE1400DB487D /* UICollectionView+ext.swift in Sources */,
 				2440D7DB2AF3B32400DB487D /* AppCoordinator.swift in Sources */,
 				2440D7B62AF3ABE800DB487D /* SceneDelegate.swift in Sources */,
 				2440D7FA2AF3C05300DB487D /* JobListModel.swift in Sources */,
