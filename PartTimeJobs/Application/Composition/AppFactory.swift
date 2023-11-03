@@ -9,7 +9,7 @@ import UIKit
 
 struct AppFactory {
     
-    let appDIContainer: AppDIContainer?
+    let appDIContainer: AppDIContainer
     
     func makeJobListCoordinator(
         navigation: UINavigationController

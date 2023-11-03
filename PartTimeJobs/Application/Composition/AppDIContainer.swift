@@ -6,5 +6,7 @@
 //
 
 struct AppDIContainer {
-    // Сюда все сервисы наверное заебеню
+    
+    // Network Container
+    let jobNetworkService = JobNetworkServiceImp(baseUrl: R.API.jobs)
 }

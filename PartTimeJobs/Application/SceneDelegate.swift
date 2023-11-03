@@ -11,8 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var appCoordinator: Coordinator?
-    var appFactory: AppFactory?
-    var appDIContainer: AppDIContainer?
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -20,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        appDIContainer = AppDIContainer()
-        appFactory = AppFactory(appDIContainer: appDIContainer)
+        let appDIContainer = AppDIContainer()
+        let appFactory = AppFactory(appDIContainer: appDIContainer)
         appCoordinator = AppCoordinator(window: window, navigation: .init(), factory: appFactory)
         appCoordinator?.start()
     }
