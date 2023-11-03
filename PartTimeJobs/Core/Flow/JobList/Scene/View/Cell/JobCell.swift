@@ -9,9 +9,6 @@ import UIKit
 
 final class JobCell: UICollectionViewCell {
     
-    // MARK: - Public property
-    var identifier: String?
-    
     // MARK: - Private property
     private lazy var containerStackView: UIStackView = {
         let stackView = UIStackView()
@@ -62,10 +59,9 @@ final class JobCell: UICollectionViewCell {
 
     // MARK: - Configure cell
     func configure(with job: Job) {
-        identifier = job.id
         professionLabel.text = job.profession
         salaryView.configure(type: .price(salary: job.salary))
-        logoStackView.configure(image: UIImage(systemName: "people"), label: job.employer)
+        logoStackView.configure(imageUrl: job.logo, label: job.employer)
         timeStackView.configure(with: job.date)
     }
 }
