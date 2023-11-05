@@ -18,7 +18,7 @@ extension UICollectionView.CellRegistration {
 
 extension UICollectionView {
     
-    func select(_ indexPaths: [IndexPath], animated: Bool = false, scrollPosition: UICollectionView.ScrollPosition) {
+    func select(_ indexPaths: [IndexPath], animated: Bool = false, scrollPosition: UICollectionView.ScrollPosition = []) {
         for path in indexPaths {
             selectItem(at: path, animated: animated, scrollPosition: scrollPosition)
         }

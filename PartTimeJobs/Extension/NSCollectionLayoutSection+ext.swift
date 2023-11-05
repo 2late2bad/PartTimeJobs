@@ -29,7 +29,7 @@ extension NSCollectionLayoutSection {
 
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 8
-        section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 80, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 12, trailing: 0)
         return section
     }
 }
