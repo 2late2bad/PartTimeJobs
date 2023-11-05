@@ -16,12 +16,14 @@ open class BaseStackView: UIStackView {
     convenience init(
         axis: NSLayoutConstraint.Axis = .horizontal,
         alignment: UIStackView.Alignment = .center,
-        distribution: UIStackView.Distribution = .equalSpacing
+        distribution: UIStackView.Distribution = .equalSpacing,
+        spacing: CGFloat = 4
     ) {
         self.init(frame: .zero)
         self.axis = axis
         self.alignment = alignment
         self.distribution = distribution
+        self.spacing = spacing
     }
     
     required public init(coder: NSCoder) {

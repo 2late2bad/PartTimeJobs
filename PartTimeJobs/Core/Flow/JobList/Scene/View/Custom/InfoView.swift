@@ -30,11 +30,6 @@ final class InfoView: UIView {
         }
     }
     
-    override var intrinsicContentSize: CGSize {
-        let labelSize = label.intrinsicContentSize
-        return CGSize(width: labelSize.width, height: labelSize.height)
-    }
-    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
