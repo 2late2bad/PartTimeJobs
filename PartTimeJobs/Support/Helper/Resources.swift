@@ -16,12 +16,12 @@ enum Resources {
     }
     
     enum Constants {
-        
+        static let logoImageDefault = "questionmark.circle.fill"
     }
     
     enum Colors {
         /// Job List Screen
-        case viewBackground
+        case navBarBack
         case collectionViewBackground
         case listItemBackground
         case mainInteractive
@@ -30,10 +30,11 @@ enum Resources {
         case imageBorder
         case shadowForSelect
         case shadowDefault
+        case borderDefault
         
         var ui: UIColor {
             switch self {
-            case .viewBackground, .listItemBackground:
+            case .navBarBack, .listItemBackground:
                 return hexStringToUIColor(hex: "#FFFFFF")
             case .collectionViewBackground, .divider, .imageBorder:
                 return hexStringToUIColor(hex: "#EEEEEE")
@@ -41,7 +42,7 @@ enum Resources {
                 return hexStringToUIColor(hex: "#F7CE17")
             case .secondaryInteractive:
                 return hexStringToUIColor(hex: "#DEDEDE")
-            case .shadowDefault:
+            case .shadowDefault, .borderDefault:
                 return hexStringToUIColor(hex: "#000000")
             }
         }
