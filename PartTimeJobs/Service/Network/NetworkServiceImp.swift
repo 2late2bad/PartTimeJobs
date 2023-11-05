@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class JobNetworkServiceImp: JobNetworkService {
+final class NetworkServiceImp: NetworkService {
     
     private let baseUrl: String
     private let session: URLSession
@@ -23,22 +23,26 @@ final class JobNetworkServiceImp: JobNetworkService {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
 
-    func fetchJobs() async throws -> [Job] {
+    func request<T: Decodable>(_ httpMethod: HttpMethod) async throws -> T {
         guard let url = URL(string: baseUrl) else {
             throw NetworkError.invalidURL
         }
         
         let (data, response) = try await session.data(from: url)
         
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NetworkError.requestFailed
+        guard let response = response as? HTTPURLResponse else {
+            throw NetworkError.invalidResponse
+        }
+        
+        guard response.statusCode == 200 else {
+            throw NetworkError.invalidStatusCode(response.statusCode)
         }
         
         do {
-            let jobs = try decoder.decode([Job].self, from: data)
-            return jobs
+            let parse = try decoder.decode(T.self, from: data)
+            return parse
         } catch {
-            throw NetworkError.decodingFailed
+            throw NetworkError.invalidDecoding
         }
     }
 }
