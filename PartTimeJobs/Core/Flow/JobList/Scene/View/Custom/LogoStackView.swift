@@ -19,7 +19,6 @@ final class LogoStackView: UIStackView {
         imageView.layer.borderColor = R.Colors.imageBorder.ui.cgColor
         imageView.layer.borderWidth = LocalConstant.borderImage
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: R.Constants.logoImageDefault)
         imageView.tintColor = R.Colors.secondaryInteractive.ui
         return imageView
     }()
@@ -48,7 +47,7 @@ final class LogoStackView: UIStackView {
     
     // MARK: - Methods
     func prepareForReuse() {
-        imageView.image = UIImage(systemName: R.Constants.logoImageDefault)
+        imageView.image = nil
     }
     
     func configure(imageUrl: String?, label: String?) {
@@ -57,7 +56,11 @@ final class LogoStackView: UIStackView {
         ImageLoader.instance.downloadImage(from: imageUrl) { [weak self] data in
             guard let self else { return }
             DispatchQueue.main.async {
-                self.imageView.image = UIImage(data: data)
+                if let data {
+                    self.imageView.image = UIImage(data: data)
+                } else {
+                    self.imageView.image = UIImage(systemName: R.Constants.logoImageDefault)
+                }
             }
         }
     }

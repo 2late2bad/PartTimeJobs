@@ -19,6 +19,7 @@ struct JobModel: Decodable {
 }
 
 extension JobModel: Hashable {
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

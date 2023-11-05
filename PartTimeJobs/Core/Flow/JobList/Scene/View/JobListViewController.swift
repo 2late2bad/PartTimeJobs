@@ -7,17 +7,13 @@
 
 import UIKit
 
-protocol JobListPresenterProtocol {
-    init(view: JobListViewProtocol, model: JobListModel, networkService: JobNetworkService)
-    func viewDidLoad()
-    func bookingButtonTapped()
-    func didSelectJob(id: String)
-    func didDeselectJob(id: String)
-    func updateSearchController(searchBarText: String?)
-}
-
 final class JobListViewController: UIViewController {
-        
+    
+    enum LocalConstants {
+        // Адаптивная настройка высоты footer view с кнопкой с учетом наличия/отсутствия safeArea
+        static let heightFootView: CGFloat = 80
+    }
+    
     typealias Datasource = UICollectionViewDiffableDataSource<Section, SectionItem>
     typealias Snapshot   = NSDiffableDataSourceSnapshot<Section, SectionItem>
     typealias JobCellReg = UICollectionView.CellRegistration<JobCell, SectionItem>
@@ -27,17 +23,26 @@ final class JobListViewController: UIViewController {
     private var dataSource: Datasource!
     private let searchController = UISearchController(searchResultsController: nil)
     private lazy var bookingButton = BookingButton(primaryAction: bookingAction)
-    private let backButtonView = UIView()
+    private let footerView = UIView()
     private var bookingAction: UIAction {
         UIAction { [unowned self] _ in
             presenter.bookingButtonTapped()
         }
     }
     
+    var bottomSafeAreaInset: CGFloat {
+        let window = UIWindow.keyWindow
+        return window?.safeAreaInsets.bottom ?? 0.0
+    }
+    
+    var contentInsets: UIEdgeInsets {
+        UIEdgeInsets(top: 0, left: 0, bottom: LocalConstants.heightFootView, right: 0)
+    }
+    
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.backgroundColor = R.Colors.collectionViewBackground.ui
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.contentInset = contentInsets
         collectionView.showsVerticalScrollIndicator = false
         collectionView.allowsMultipleSelection = true
         collectionView.delegate = self
@@ -59,9 +64,10 @@ final class JobListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupUI()
+        setupLayout()
         setupSearchController()
         createDataSource()
+        setupObservers()
         presenter.viewDidLoad()
     }
 }
@@ -70,73 +76,92 @@ final class JobListViewController: UIViewController {
 private extension JobListViewController {
     
     func setupViews() {
-        view.backgroundColor = R.Colors.viewBackground.ui
-        view.addSubviews(collectionView, backButtonView, bookingButton)
-        backButtonView.backgroundColor = R.Colors.viewBackground.ui.withAlphaComponent(0.9)
+        view.backgroundColor = .systemBackground
+        view.addSubviews(collectionView, footerView, bookingButton)
+        footerView.backgroundColor = R.Colors.listItemBackground.ui.withAlphaComponent(0.9)
     }
     
-    func setupUI() {
-        backButtonView.translatesAutoresizingMaskIntoConstraints = false
-        bookingButton.translatesAutoresizingMaskIntoConstraints = false
+    func setupLayout() {
+        footerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            footerView.heightAnchor.constraint(equalToConstant: LocalConstants.heightFootView + bottomSafeAreaInset),
             
-            backButtonView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            backButtonView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backButtonView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backButtonView.heightAnchor.constraint(equalToConstant: 100),
-            
-            bookingButton.topAnchor.constraint(equalTo: backButtonView.topAnchor, constant: 16),
-            bookingButton.leadingAnchor.constraint(equalTo: backButtonView.leadingAnchor, constant: 16),
-            bookingButton.trailingAnchor.constraint(equalTo: backButtonView.trailingAnchor, constant: -16),
-            bookingButton.heightAnchor.constraint(equalToConstant: 48)
+            bookingButton.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 16),
+            bookingButton.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 16),
+            bookingButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -16),
+            bookingButton.bottomAnchor.constraint(equalTo: footerView.bottomAnchor, constant: -16 - bottomSafeAreaInset)
         ])
     }
     
     func setupSearchController() {
         searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск"
-        
+        searchController.searchBar.keyboardType = .default
+        searchController.searchBar.searchTextField.returnKeyType = .done
         definesPresentationContext = false
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.titleView = searchController.searchBar
     }
-
+    
     func createDataSource() {
         let cellRegistration = JobCellReg { cell, indexPath, item in
-            if case let .jobs(job) = item {
-                cell.configure(with: job)
+            switch item {
+            case .jobs(let item):
+                cell.configure(with: item)
             }
         }
-
+        
         dataSource = Datasource(collectionView: collectionView,
                                 cellProvider: cellRegistration.cellProvider)
     }
     
+    func setupObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height - bottomSafeAreaInset, right: 0)
+        collectionView.contentInset = contentInsets
+        collectionView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        collectionView.contentInset = self.contentInsets
+        collectionView.scrollIndicatorInsets = self.contentInsets
+    }
+    
     func applySnapshot(
         data: SectionData,
-        selectedPaths: [IndexPath],
         animatingDifferences: Bool = false,
         completion: (() -> Void)? = nil
     ) {
         var snapshot = Snapshot()
-        //snapshot.deleteAllItems()
+        snapshot.deleteAllItems()
         snapshot.appendSections([data.key])
         snapshot.appendItems(data.values, toSection: data.key)
         self.dataSource.apply(snapshot, animatingDifferences: animatingDifferences, completion: completion)
-        collectionView.select(selectedPaths, scrollPosition: [])
+        collectionView.select(data.selectedPath)
     }
 }
 
 // MARK: - JobListViewProtocol
 extension JobListViewController: JobListViewProtocol {
     
-    func updateButton(with title: String, isActive: Bool) {
+    func updateButton(with title: String?, isActive: Bool) {
         bookingButton.configure(with: title, isActive: isActive)
     }
     
@@ -146,8 +171,8 @@ extension JobListViewController: JobListViewProtocol {
         present(alert, animated: true)
     }
     
-    func updateCollection(with data: SectionData, selectedPaths: [IndexPath]) {
-        applySnapshot(data: data, selectedPaths: selectedPaths, animatingDifferences: true)
+    func updateCollection(with data: SectionData) {
+        applySnapshot(data: data, animatingDifferences: true)
     }
 }
 
@@ -158,7 +183,7 @@ extension JobListViewController: UICollectionViewDelegate {
         if let item = dataSource.itemIdentifier(for: indexPath) {
             switch item {
             case .jobs(let job):
-                presenter.didSelectJob(id: job.id)
+                presenter.didSelectJob(job)
             }
         }
     }
@@ -167,7 +192,7 @@ extension JobListViewController: UICollectionViewDelegate {
         if let item = dataSource.itemIdentifier(for: indexPath) {
             switch item {
             case .jobs(let job):
-                presenter.didDeselectJob(id: job.id)
+                presenter.didDeselectJob(job)
             }
         }
     }
@@ -177,5 +202,12 @@ extension JobListViewController: UICollectionViewDelegate {
 extension JobListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         presenter.updateSearchController(searchBarText: searchController.searchBar.text)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension JobListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchController.dismiss(animated: true)
     }
 }

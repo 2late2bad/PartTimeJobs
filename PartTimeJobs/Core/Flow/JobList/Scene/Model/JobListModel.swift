@@ -7,55 +7,65 @@
 
 import Foundation
 
-// TODO: -
-enum Section: Hashable {
-    case jobs
-}
-
-enum SectionItem: Hashable {
-    case jobs(Job)
-}
-
-struct SectionData {
-    var key: Section
-    var values: [SectionItem]
-}
-
 struct JobListModel {
     
-    var allJobs: SectionData { allJobSection }
-    var filterJobs: SectionData { filterJobSection }
-    //var selectedPaths: [IndexPath] = []
+    // MARK: - Public property
+    var allJobsData: SectionData { allJobSection }
     
-    private var allJobSection: SectionData = .init(key: .jobs, values: [])
-    private var filterJobSection: SectionData = .init(key: .jobs, values: [])
-    
-    init() {
-        // TODO: - MOCK DATA
-        allJobSection =
-        SectionData(key: .jobs, values: [
-            .jobs(.init(id: "1", profession: "Грузчик", employer: "Озон", salary: 1600, date: .now, logo: nil)),
-            .jobs(.init(id: "2", profession: "Монтажник", employer: "ОЗОН", salary: 200, date: .now, logo: nil)),
-            .jobs(.init(id: "3", profession: "Разработчик", employer: "Пятерочка", salary: 14400, date: .now, logo: nil)),
-            .jobs(.init(id: "4", profession: "Строитель", employer: "Шелф", salary: 1200, date: .now, logo: nil)),
-            .jobs(.init(id: "5", profession: "Монтажник", employer: "ОЗОН", salary: 200.12, date: .now, logo: nil)),
-            .jobs(.init(id: "6", profession: "Разработчик", employer: "Пятерочка", salary: 14400, date: .now, logo: nil)),
-            .jobs(.init(id: "7", profession: "Строитель", employer: "Шелф", salary: 1200.00, date: .now, logo: nil)),
-            .jobs(.init(id: "8", profession: "Монтажник", employer: "ОЗОН", salary: 200, date: .now, logo: nil)),
-            .jobs(.init(id: "9", profession: "Разработчик", employer: "Пятерочка", salary: 14400, date: .now, logo: nil)),
-            .jobs(.init(id: "10", profession: "Коп", employer: "Пятерочка", salary: 0.01, date: .now, logo: nil)),
-            .jobs(.init(id: "11", profession: "Копр", employer: "Пятерочка", salary: 14400, date: .now, logo: nil)),
-            .jobs(.init(id: "12", profession: "Копро", employer: "Пятерочка", salary: 5555.55, date: .now, logo: nil))
-        ])
+    var allJobs: [Job] {
+        allJobSection.values.map { item -> Job in
+            switch item {
+            case .jobs(let job):
+                return job
+            }
+        }
     }
     
+    var selectedJobsById: Set<String> = Set() {
+        didSet {
+            UserDefaults.selectedID = Array(selectedJobsById)
+            updatePaths()
+        }
+    }
+    
+    // MARK: - Private property
+    private var allJobSection: SectionData = .init(key: .jobs, values: [], selectedPath: [])
+    
+    // MARK: - Init
+    init() {
+        selectedJobsById = Set(UserDefaults.selectedID)
+    }
+    
+    // MARK: - Public methods
     mutating func updateJobs(_ jobs: [Job]) {
         let sectionItems = jobs.map { SectionItem.jobs($0) }
         allJobSection.values = sectionItems
+        updateID()
     }
     
-    mutating func updateFilterJobs(_ jobs: [Job]) {
-        let sectionItems = jobs.map { SectionItem.jobs($0) }
-        filterJobSection.values = sectionItems
+    // MARK: - Private methods
+    private mutating func updatePaths() {
+        var newSelectedPaths: [IndexPath] = []
+        
+        for (index, job) in allJobs.enumerated() {
+            if selectedJobsById.contains(job.id) {
+                let section = Section.jobs.rawValue
+                newSelectedPaths.append(IndexPath(item: index, section: section))
+            }
+        }
+                
+        allJobSection.selectedPath = newSelectedPaths
+    }
+    
+    private mutating func updateID() {
+        var newSelectID: Set<String> = Set()
+        
+        for job in allJobs {
+            if selectedJobsById.contains(job.id) {
+                newSelectID.insert(job.id)
+            }
+        }
+                
+        selectedJobsById = newSelectID
     }
 }

@@ -20,7 +20,7 @@ enum Resources {
     }
     
     enum Colors {
-        /// Job List Screen
+        // Job List Screen
         case navBarBack
         case collectionViewBackground
         case listItemBackground

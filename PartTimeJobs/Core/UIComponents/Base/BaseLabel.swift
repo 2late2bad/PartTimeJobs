@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class BaseLabel: UILabel {
+open class BaseLabel: UILabel {
     
     // MARK: - Init
     public override init(frame: CGRect) {
@@ -23,7 +23,7 @@ public class BaseLabel: UILabel {
         self.numberOfLines = lines
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

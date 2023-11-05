@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class BaseStackView: UIStackView {
+open class BaseStackView: UIStackView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,7 +24,7 @@ public class BaseStackView: UIStackView {
         self.distribution = distribution
     }
     
-    required init(coder: NSCoder) {
+    required public init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

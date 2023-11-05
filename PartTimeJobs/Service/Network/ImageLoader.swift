@@ -14,8 +14,8 @@ final class ImageLoader {
     
     private let cache = NSCache<NSString, NSData>()
  
-    func downloadImage(from urlString: String?, completed: @escaping (Data) -> Void) {
-        guard let urlString else { return }
+    func downloadImage(from urlString: String?, completed: @escaping (Data?) -> Void) {
+        guard let urlString else { completed(nil); return }
 
         let cacheKey = NSString(string: urlString)
         
@@ -24,14 +24,14 @@ final class ImageLoader {
             return
         }
 
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: urlString) else { completed(nil); return }
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let self = self,
                   let response = response as? HTTPURLResponse, response.statusCode == 200,
                   let data = data,
                   error == nil
-            else { return }
+            else { completed(nil); return }
             self.cache.setObject(data as NSData, forKey: cacheKey)
             completed(data)
         }
