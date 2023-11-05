@@ -53,8 +53,7 @@ final class JobCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        // TODO: - ?????
-        //setSelected(false)
+        logoStackView.prepareForReuse()
     }
 
     // MARK: - Configure cell
@@ -80,8 +79,8 @@ private extension JobCell {
     }
     
     func setupSelf() {
-        setShadow(color: R.Colors.shadowDefault.ui, alpha: 0.12, radius: 4, cornerRadius: 15)
         backgroundColor = R.Colors.listItemBackground.ui
+        setShadow(color: R.Colors.shadowDefault.ui, alpha: 0.12, radius: 4, cornerRadius: 15)
         addSubview(containerStackView)
         containerStackView.addArrangedSubview(topInfoStackView)
         containerStackView.addSeparator(of: 1, color: R.Colors.divider.ui)
