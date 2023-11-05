@@ -7,6 +7,6 @@
 
 struct AppDIContainer {
     
-    // Network Container
-    let jobNetworkService = JobNetworkServiceImp(baseUrl: R.API.jobs)
+    // MARK: - Network Container
+    let jobNetworkService = NetworkServiceImp(baseUrl: R.API.jobs)
 }
