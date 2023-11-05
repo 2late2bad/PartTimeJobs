@@ -18,6 +18,13 @@ final class AppCoordinator: Coordinator {
         self.window = window
         self.navigation = navigation
         self.factory = factory
+        if #available(iOS 15, *) {
+            let navBarApp = UINavigationBarAppearance()
+            navBarApp.configureWithOpaqueBackground()
+            navBarApp.backgroundColor = R.Colors.navBarBack.ui
+            navBarApp.shadowColor = .clear
+            UINavigationBar.appearance().scrollEdgeAppearance = navBarApp
+        }
     }
     
     func start() {
