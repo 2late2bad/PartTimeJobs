@@ -13,7 +13,11 @@ final class JobListPresenter {
     private weak var view: JobListViewProtocol!
     private var model: JobListModel
     private let networkService: NetworkService
-    private var totalIncome: Double = 0.0
+    private var totalIncome: Double {
+        model.allJobs.reduce(0) { result, job in
+            model.selectedJobsById.contains(job.id) ? result + job.salary : result
+        }
+    }
     
     // MARK: - Init
     init(view: JobListViewProtocol, model: JobListModel, networkService: NetworkService) {
@@ -30,17 +34,6 @@ final class JobListPresenter {
             view?.updateButton(with: "Забронировать \(jobCount) \(word)", isActive: true)
         } else {
             view?.updateButton(with: "Выберите подработки", isActive: false)
-        }
-        calculateTotalIncome()
-    }
-    
-    private func calculateTotalIncome() {
-        totalIncome = model.allJobs.reduce(0) { result, job in
-            if model.selectedJobsById.contains(job.id) {
-                return result + job.salary
-            } else {
-                return result
-            }
         }
     }
 }
@@ -94,16 +87,17 @@ extension JobListPresenter: JobListPresenterProtocol {
             job.profession.containsFromRuKeyboard(searchText) ||
             job.employer.containsFromRuKeyboard(searchText)
         }
+        
         let filteredItems = filteredJobs.map { SectionItem.jobs($0) }
         
-        var selectedPaths: [IndexPath] = []
-        for (index, job) in filteredJobs.enumerated() {
-            if model.selectedJobsById.contains(job.id) {
-                let section = Section.jobs.rawValue
-                selectedPaths.append(IndexPath(item: index, section: section))
-            }
+        let selectedJobsDict = model.selectedJobsById.reduce(into: [String: Bool]()) { result, id in
+            result[id] = true
         }
-
+        
+        let selectedPaths = filteredJobs.enumerated().compactMap { index, job in
+            selectedJobsDict[job.id] != nil ? IndexPath(item: index, section: Section.jobs.rawValue) : nil
+        }
+        
         let filteredJobsData = SectionData(key: .jobs, values: filteredItems, selectedPath: selectedPaths)
         view.updateCollection(with: filteredJobsData)
     }

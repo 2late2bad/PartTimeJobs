@@ -44,28 +44,38 @@ struct JobListModel {
     }
     
     // MARK: - Private methods
+    private mutating func updateID() {
+        var newSelectID: Set<String> = Set()
+
+        var selectedJobsDict: [String: Bool] = [:]
+        for id in selectedJobsById {
+            selectedJobsDict[id] = true
+        }
+
+        for job in allJobs {
+            if let _ = selectedJobsDict[job.id] {
+                newSelectID.insert(job.id)
+            }
+        }
+
+        selectedJobsById = newSelectID
+    }
+    
     private mutating func updatePaths() {
         var newSelectedPaths: [IndexPath] = []
-        
+
+        var selectedJobsDict: [String: Bool] = [:]
+        for id in selectedJobsById {
+            selectedJobsDict[id] = true
+        }
+
         for (index, job) in allJobs.enumerated() {
-            if selectedJobsById.contains(job.id) {
+            if let _ = selectedJobsDict[job.id] {
                 let section = Section.jobs.rawValue
                 newSelectedPaths.append(IndexPath(item: index, section: section))
             }
         }
-                
+
         allJobSection.selectedPath = newSelectedPaths
-    }
-    
-    private mutating func updateID() {
-        var newSelectID: Set<String> = Set()
-        
-        for job in allJobs {
-            if selectedJobsById.contains(job.id) {
-                newSelectID.insert(job.id)
-            }
-        }
-                
-        selectedJobsById = newSelectID
     }
 }
